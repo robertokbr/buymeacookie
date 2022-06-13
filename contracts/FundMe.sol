@@ -7,10 +7,10 @@ import "./PriceConverter.sol";
 contract FundMe {
     using PriceConverter for uint256;
 
-    uint256 minimumUSD = 50 * 1e18;
+    uint256 public constant MINIMUM_USD = 50 * 1e18;
     address[] public funders;
     mapping(address => uint256) public addressToAmountFunded;
-    address public i_owner;
+    address public immutable i_owner;
 
     constructor() {
         i_owner = msg.sender;
@@ -22,7 +22,7 @@ contract FundMe {
     }
 
     function fund() public payable {
-        require(msg.value.getConversionRate() >= minimumUSD, "The minimum fund value is 50 USD");
+        require(msg.value.getConversionRate() >= MINIMUM_USD, "The minimum fund value is 50 USD");
 
         funders.push(msg.sender);
         addressToAmountFunded[msg.sender] += msg.value;
@@ -38,5 +38,14 @@ contract FundMe {
         (bool callSuccess,) = payable(msg.sender).call{ value: address(this).balance }("");
     
         require(callSuccess, "Call has failed");
+    }
+
+    // Prevent wrong fund calls
+    receive() external payable {
+        fund();
+    }
+
+    fallback() external payable {
+        fund();
     }
 }
