@@ -1,5 +1,6 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { networkConfig } from "../helper-hardhat-config";
+import { verify } from "../utils/verify";
 
 const deployFundMe = async (hre: HardhatRuntimeEnvironment & {
   deployments: any, getNamedAccounts: any,
@@ -21,12 +22,20 @@ const deployFundMe = async (hre: HardhatRuntimeEnvironment & {
 
   if (!ethAggregatorPriceFeedAddress) throw new Error('Undefined aggregator address!');
 
-  await deploy("FundMe", {
+  const args = [ethAggregatorPriceFeedAddress];
+  const waitConfirmations = (network.config as any).blockConfirmations || 6;
+
+  const fundMe = await deploy("FundMe", {
     contract: "FundMe",
     from: deployer,
     log: true,
-    args: [ethAggregatorPriceFeedAddress],
+    args,
+    waitConfirmations,
   });
+
+  if (chainId !== 31337 && process.env.ETHERSCAM_API_KEY) {
+    await verify(fundMe.address, args);
+  }
 }
 export default deployFundMe;
 deployFundMe.tags = ["all", "fundMe"];
