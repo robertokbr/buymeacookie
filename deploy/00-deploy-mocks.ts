@@ -1,5 +1,5 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types"
-import { DECIMALS, INITIAL_PRICE } from "../helper-hardhat-config";
+import { DECIMALS, INITIAL_PRICE, networkConfig } from "../helper-hardhat-config";
 
 const deployMocks = async (hre: HardhatRuntimeEnvironment & {
   deployments: any, getNamedAccounts: any,
@@ -10,7 +10,7 @@ const deployMocks = async (hre: HardhatRuntimeEnvironment & {
   const chainId = network.config.chainId;
 
   // If we are on a local development network, we need to deploy mocks!
-  if (chainId == 31337) {
+  if (!networkConfig.has(chainId)) {
     log("Local network detected! Deploying mocks...");
     await deploy("MockV3Aggregator", {
       contract: "MockV3Aggregator",

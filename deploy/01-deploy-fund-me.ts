@@ -12,7 +12,7 @@ const deployFundMe = async (hre: HardhatRuntimeEnvironment & {
 
   let ethAggregatorPriceFeedAddress: string | undefined;
 
-  if (chainId === 31337) {
+  if (!networkConfig.has(chainId)) {
     log("Deploying FundMe with local aggregator");
     const ethAggregatorPriceFeed = await deployments.get("MockV3Aggregator");
     ethAggregatorPriceFeedAddress = ethAggregatorPriceFeed.address;
