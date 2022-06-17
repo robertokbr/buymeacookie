@@ -8,16 +8,20 @@ import "solidity-coverage";
 import "hardhat-deploy";
 
 dotenv.config();
-        
-const accounts = process.env.PRIVATE_KEY !== undefined 
-  ? [process.env.PRIVATE_KEY] 
-  : []; 
+
+const accounts = process.env.PRIVATE_KEY !== undefined
+  ? [process.env.PRIVATE_KEY]
+  : [];
 
 const config: HardhatUserConfig = {
+  defaultNetwork: "hardhat",
   solidity: {
     compilers: [{ version: "0.8.8" }, { version: "0.7.0" }]
   },
   networks: {
+    hardhat: {
+      chainId: 31337,
+    },
     rinkeby: {
       url: process.env.RINKEBY_RPC_URL || "",
       chainId: 4,
@@ -37,6 +41,11 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
   },
+  namedAccounts: {
+    deployer: {
+        default: 0, // hh-deploy setup
+    },
+},
 };
 
 export default config;
