@@ -1,11 +1,11 @@
 import * as dotenv from "dotenv";
-import { HardhatUserConfig } from "hardhat/config";
 import "@nomiclabs/hardhat-etherscan";
 import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
 import "hardhat-deploy";
+import "@nomiclabs/hardhat-ethers"
 
 dotenv.config();
 
@@ -13,8 +13,8 @@ const accounts = process.env.PRIVATE_KEY !== undefined
   ? [process.env.PRIVATE_KEY]
   : [];
 
-const config: HardhatUserConfig = {
-  defaultNetwork: "hardhat",
+const config = {
+  defaultNetwork: "rinkeby",
   solidity: {
     compilers: [{ version: "0.8.8" }, { version: "0.7.0" }]
   },
@@ -26,10 +26,7 @@ const config: HardhatUserConfig = {
       url: process.env.RINKEBY_RPC_URL || "",
       chainId: 4,
       accounts,
-    },
-    ropsten: {
-      url: process.env.ROPSTEN_URL || "",
-      accounts,
+      blockConfirmations: 6,
     },
   },
   gasReporter: {
@@ -39,13 +36,26 @@ const config: HardhatUserConfig = {
     token: 'ETH'
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
+    apiKey: {
+      rinkeby: process.env.ETHERSCAM_API_KEY || "",
+    },
+    customChains: [
+      {
+        network: "rinkeby",
+        chainId: 4,
+        urls: {
+          apiURL: "https://api-rinkeby.etherscan.io/api",
+          browserURL: "https://rinkeby.etherscan.io"
+        }
+      }
+    ]
   },
   namedAccounts: {
     deployer: {
-        default: 0, // hh-deploy setup
+      default: 0, // hh-deploy setup
+      1: 0,
     },
-},
+  },
 };
 
 export default config;
