@@ -18,6 +18,8 @@ A simple crowdfunding smart contract made with solidity and Hardhat.
 - Gas reporter;
 - Solidity coverage;
 - Typechain
+- Unit tests
+- Mocks
 
 ## 🪖 Some Hardhat commands:
 
