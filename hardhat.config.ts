@@ -1,36 +1,42 @@
-import "@nomiclabs/hardhat-waffle";
-import "dotenv/config";
+import * as dotenv from "dotenv";
+import { HardhatUserConfig } from "hardhat/config";
 import "@nomiclabs/hardhat-etherscan";
-import "./tasks/block-number";
+import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
-import "hardhat-gas-reporter"
-import "@nomiclabs/hardhat-ethers";
-import "@typechain/hardhat";
+import "hardhat-gas-reporter";
+import "solidity-coverage";
+import "hardhat-deploy";
 
-/**
- * @type import('hardhat/config').HardhatUserConfig
- */
-module.exports = {
-  defaultNetwork: 'rinkeby',
+dotenv.config();
+        
+const accounts = process.env.PRIVATE_KEY !== undefined 
+  ? [process.env.PRIVATE_KEY] 
+  : []; 
+
+const config: HardhatUserConfig = {
+  solidity: {
+    compilers: [{ version: "0.8.8" }, { version: "0.7.0" }]
+  },
   networks: {
     rinkeby: {
-      url: process.env.RINKEBY_RPC_URL,
+      url: process.env.RINKEBY_RPC_URL || "",
       chainId: 4,
-      accounts: [
-        process.env.PRIVATE_KEY,
-      ],
+      accounts,
+    },
+    ropsten: {
+      url: process.env.ROPSTEN_URL || "",
+      accounts,
     },
   },
-  etherscan: {
-    apiKey: process.env.ETHERSCAM_API_KEY,
-  },
   gasReporter: {
-    enabled: true,
-    outputFile: 'gas-reporter.txt',
-    noColors: true,
+    enabled: process.env.REPORT_GAS !== undefined,
     currency: "USD",
     coinmarketcap: process.env.COINMARKETCAP_API_KEY,
-    token: "MATIC"
+    token: 'ETH'
   },
-  solidity: "0.8.8",
+  etherscan: {
+    apiKey: process.env.ETHERSCAN_API_KEY,
+  },
 };
+
+export default config;
