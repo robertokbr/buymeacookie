@@ -1,7 +1,5 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types"
-
-const DECIMALS = "18"
-const INITIAL_PRICE = "2000000000000000000000" // 2000
+import { DECIMALS, INITIAL_PRICE } from "../helper-hardhat-config";
 
 const deployMocks = async (hre: HardhatRuntimeEnvironment & {
   deployments: any, getNamedAccounts: any,
