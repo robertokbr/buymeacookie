@@ -8,6 +8,8 @@ A simple crowdfunding smart contract made with solidity and Hardhat.
 - Fallback and Receive functions;
 - Constant and immutable properties;
 - Payable functions;
+- Receive and Fallback functions;
+- Storage and Memmory variables;
 
 ### Hardhat
 - Contract compilation;
