@@ -41,9 +41,7 @@
 
 ![Product Name Screen Shot](.github/screenshot.png)
 
-
-Buymeacookie is an application inpired on the app [buymeacoffee](https://www.buymeacoffee.com/), a content creator support application. This uses the blockchain as core infraestructure to handle donations and give credit to the donors.
-
+Buymeacookie is an application inspired by the app [buymeacoffee](https://www.buymeacoffee.com/),which is a content creator support application. This uses the blockchain as the core infrastructure to handle donations and give credit to donors.
 
 ### Built With
 * [Next.js](https://nextjs.org/)
@@ -54,7 +52,7 @@ Buymeacookie is an application inpired on the app [buymeacoffee](https://www.buy
 
 <!-- GETTING STARTED -->
 ## Getting Started
-To get started wiht the development setup, you first got to deploy the smart contract locally. After this, fill in the frontend environment variables with the fundMe contract address, which will be logged after the `yarn deploy` command.
+To get started with the development setup, you first got to deploy the smart contract locally. After this, fill in the frontend environment variables with the fundMe contract address, which will be logged after the `yarn deploy` command.
 
 ### Installation
 1. Clone the repo
