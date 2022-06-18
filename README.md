@@ -52,44 +52,27 @@ Buymeacookie is an application inspired by the app [buymeacoffee](https://www.bu
 
 <!-- GETTING STARTED -->
 ## Getting Started
-To get started with the development setup, you first got to deploy the smart contract locally. After this, fill in the frontend environment variables with the fundMe contract address, which will be logged after the `yarn deploy` command.
+To get started wiht the Rinkeby setup, you don't need to deploy the smart contract locally. You'll just need to have a MetaMask installed and the Rinkeby network configured.
 
 ### Installation
 1. Clone the repo
    ```sh
    git clone https://github.com/robertokbr/buymeacookie.git
    ```
-2. Install NPM packages
+2. Install npm packages
    ```sh
-   cd contracts && npm install
+   cd frontend && npm install
    ```
-3. Deploy the contract locally
-   ```sh
-   yarn deploy
-   ```   
-4. Enter the FundMe address into the `.env.local`, inside the frontend dir
-   ```sh
-   cd frontend && cp .env.example .env.local
-   ```
-   ```js
-   // .env.example
-   NEXT_PUBLIC_FUNDME_ADDRESS='ENTER THE ADDRESS HERE';
-   ```
-5. Install frontend NPM packages
-   ```sh
-   npm install
-   ```
-6. Run frontend
+3. Run frontend
    ```sh
    yarn dev
-   ``` 
-
+   ```   
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-To use it, open your browser and get to the address `http://localhost:3000`. 
-If you do not have metamask installed, go to https://metamask.io/ to install.
-
+To use it, open your browser and head to the address `http://localhost:3000`. 
+If you do not have MetaMask installed, go to [MetaMask website](https://metamask.io)/ to install.
+In case you already have this installed, change your network to Rinkeby. 
 
 <!-- ROADMAP -->
 ## Roadmap
