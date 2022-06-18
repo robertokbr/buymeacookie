@@ -208,5 +208,5 @@ This app backend (smart contract) was made following the resource bellow:
 [license-shield]: https://img.shields.io/github/license/robertokbr/buymeacookie.svg?style=for-the-badge
 [license-url]: https://github.com/robertokbr/buymeacookie/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/robertokbr
+[linkedin-url]: https://www.linkedin.com/in/robertojrcdc/
 [product-screenshot]: images/screenshot.png
