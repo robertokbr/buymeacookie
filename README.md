@@ -16,7 +16,7 @@
   <h3 align="center">buymeacookie</h3>
 
   <p align="center">
-    A crowd funding application made on top of the fundMe smart contract.
+    A crowd funding application made with Solidity, Hardhat, Next.JS and Ethers.JS.
     <br />
     <a href="https://github.com/robertokbr/buymeacookie"><strong>Explore the docs »</strong></a>
     <br />
