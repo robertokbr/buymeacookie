@@ -69,16 +69,11 @@
 Buymeacookie is an application inpired on the app [buymeacoffee](https://www.buymeacoffee.com/), a content creator support application. This uses the blockchain as core infraestructure to handle donations and give credit to the donors.
 
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
 ### Built With
 * [Next.js](https://nextjs.org/)
 * [Chakra-ui](https://chakra-ui.com/)
 * [Hardhat](https://hardhat.org/)
 * [Ethers.js](https://www.npmjs.com/package/ethers)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 <!-- GETTING STARTED -->
@@ -113,16 +108,13 @@ To get started wiht the development setup, you first got to deploy the smart con
 6. Run frontend
    ```sh
    yarn dev
-   ```   
-<p align="right">(<a href="#top">back to top</a>)</p>
+   ``` 
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 To use it, open your browser and get to the address `http://localhost:3000`. 
 If you do not have metamask installed, go to https://metamask.io/ to install.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 <!-- ROADMAP -->
@@ -173,15 +165,11 @@ Don't forget to give the project a star! Thanks again!
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 <!-- CONTACT -->
 ## Contact
 
 Roberto Junior - [@robertojrdev](https://twitter.com/robertojrdev) - robertojuniordev@gmail.com
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 <!-- ACKNOWLEDGMENTS -->
@@ -189,8 +177,6 @@ Roberto Junior - [@robertojrdev](https://twitter.com/robertojrdev) - robertojuni
 This app backend (smart contract) was made following the resource bellow:
 
 * [Learn Blockchain, Solidity, and Full Stack Web3 Development with JavaScript – 32-Hour Course](https://www.youtube.com/watch?v=gyMwXuJrbJQ&t=46910s)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
