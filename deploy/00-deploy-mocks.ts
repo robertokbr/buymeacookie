@@ -7,7 +7,7 @@ const deployMocks = async (hre: HardhatRuntimeEnvironment & {
   const { deployments, getNamedAccounts, network } = hre;
   const { deploy, log } = deployments;
   const { deployer } = await getNamedAccounts();
-  const chainId = network.config.chainId;
+  const chainId = network.config.chainId || 31337;
 
   // If we are on a local development network, we need to deploy mocks!
   if (!networkConfig.has(chainId)) {

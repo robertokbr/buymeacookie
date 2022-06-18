@@ -8,7 +8,7 @@ const deployFundMe = async (hre: HardhatRuntimeEnvironment & {
   const { deployments, getNamedAccounts, network } = hre;
   const { deploy, log } = deployments;
   const { deployer } = await getNamedAccounts();
-  const chainId = network.config.chainId || 4;
+  const chainId = network.config.chainId || 31337;
 
   let ethAggregatorPriceFeedAddress: string | undefined;
 
@@ -23,7 +23,7 @@ const deployFundMe = async (hre: HardhatRuntimeEnvironment & {
   if (!ethAggregatorPriceFeedAddress) throw new Error('Undefined aggregator address!');
 
   const args = [ethAggregatorPriceFeedAddress];
-  const waitConfirmations = (network.config as any).blockConfirmations || 6;
+  const waitConfirmations = (network.config as any).blockConfirmations || 1;
 
   const fundMe = await deploy("FundMe", {
     contract: "FundMe",
