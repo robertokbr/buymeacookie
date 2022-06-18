@@ -68,7 +68,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![Product Name Screen Shot](.github/screenshot.png)
 
 Buymeacookie is an application inpired on the app [buymeacoffee](https://www.buymeacoffee.com/), that uses the blockchain as core infraestructure to handle donations for content creators and give credit to the donors.
 
@@ -101,7 +101,7 @@ To get started wiht the development setup, you first got to deploy the smart con
    ```
 3. Deploy the contract locally
    ```sh
-  yarn deploy
+   yarn deploy
    ```   
 4. Enter the FundMe address into the `.env.local`, inside the frotend dir
    ```sh
@@ -117,7 +117,7 @@ To get started wiht the development setup, you first got to deploy the smart con
    ```
 6. Run frontend
    ```sh
-  yarn dev
+   yarn dev
    ```   
 <p align="right">(<a href="#top">back to top</a>)</p>
 
