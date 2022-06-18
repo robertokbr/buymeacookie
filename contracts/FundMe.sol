@@ -15,10 +15,10 @@ contract FundMe {
   using PriceConverter for uint256;
 
   uint256 public constant MINIMUM_USD = 50 * 1e18;
-  address[] public funders;
-  mapping(address => uint256) public addressToAmountFunded;
+  address[] public s_funders;
+  mapping(address => uint256) public s_addressToAmountFunded;
   address public immutable i_owner;
-  AggregatorV3Interface public priceFeed;
+  AggregatorV3Interface public s_priceFeed;
 
   modifier onlyOwner{
     if (msg.sender != i_owner) revert FundMe__NotOwner();
@@ -27,7 +27,7 @@ contract FundMe {
 
   constructor(address priceFeedAddress) {
     i_owner = msg.sender;
-    priceFeed = AggregatorV3Interface(priceFeedAddress);
+    s_priceFeed = AggregatorV3Interface(priceFeedAddress);
   }
 
   receive() external payable {
@@ -42,18 +42,20 @@ contract FundMe {
    *  @notice This function funds this contract and create a realtion between sender and funds
    */
   function fund() public payable {
-    require(msg.value.getConversionRate(priceFeed) >= MINIMUM_USD, "The minimum fund value is 50 USD");
+    require(msg.value.getConversionRate(s_priceFeed) >= MINIMUM_USD, "The minimum fund value is 50 USD");
 
-    funders.push(msg.sender);
-    addressToAmountFunded[msg.sender] += msg.value;
+    s_funders.push(msg.sender);
+    s_addressToAmountFunded[msg.sender] += msg.value;
   }
 
   function withdraw() public onlyOwner payable {
+    address[] memory funders = s_funders;
+
     for (uint256 i = 0; i < funders.length; i++) {
-        addressToAmountFunded[funders[i]] = 0;
+        s_addressToAmountFunded[funders[i]] = 0;
     }
 
-    funders = new address[](0);
+    s_funders = new address[](0);
 
     (bool callSuccess,) = payable(msg.sender).call{ value: address(this).balance }("");
 
