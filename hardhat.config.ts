@@ -14,7 +14,7 @@ const accounts = process.env.PRIVATE_KEY !== undefined
   : [];
 
 const config = {
-  defaultNetwork: "rinkeby",
+  defaultNetwork: "hardhat",
   solidity: {
     compilers: [{ version: "0.8.8" }, { version: "0.7.0" }]
   },
