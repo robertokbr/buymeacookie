@@ -16,7 +16,6 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -25,7 +24,7 @@
   <h3 align="center">buymeacookie</h3>
 
   <p align="center">
-    And crowd funding application made on top of the fundMe smart contract.
+    A crowd funding application made on top of the fundMe smart contract.
     <br />
     <a href="https://buy-me-a-cookie.rbjr.dev">View Demo</a>
     ·
@@ -34,7 +33,6 @@
     <a href="https://github.com/robertokbr/buymeacookie/issues">Request Feature</a>
   </p>
 </div>
-
 
 
 <!-- TABLE OF CONTENTS -->
@@ -64,13 +62,13 @@
 </details>
 
 
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
 ![Product Name Screen Shot](.github/screenshot.png)
 
-Buymeacookie is an application inpired on the app [buymeacoffee](https://www.buymeacoffee.com/), that uses the blockchain as core infraestructure to handle donations for content creators and give credit to the donors.
+
+Buymeacookie is an application inpired on the app [buymeacoffee](https://www.buymeacoffee.com/), a content creator support application. This uses the blockchain as core infraestructure to handle donations and give credit to the donors.
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -85,10 +83,9 @@ Buymeacookie is an application inpired on the app [buymeacoffee](https://www.buy
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-
 <!-- GETTING STARTED -->
 ## Getting Started
-To get started wiht the development setup, you first got to deploy the smart contract locally, and after, fill in the frontend environment variables with the fundMe contract address that the contracts project will log after the deploy command.
+To get started wiht the development setup, you first got to deploy the smart contract locally. After this, fill in the frontend environment variables with the fundMe contract address, which will be logged after the `yarn deploy` command.
 
 ### Installation
 1. Clone the repo
@@ -103,7 +100,7 @@ To get started wiht the development setup, you first got to deploy the smart con
    ```sh
    yarn deploy
    ```   
-4. Enter the FundMe address into the `.env.local`, inside the frotend dir
+4. Enter the FundMe address into the `.env.local`, inside the frontend dir
    ```sh
    cd frontend && cp .env.example .env.local
    ```
@@ -122,10 +119,10 @@ To get started wiht the development setup, you first got to deploy the smart con
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-
 <!-- USAGE EXAMPLES -->
 ## Usage
-To use it, open your browser and get to the address `http://localhost:3000`. If you do not have metamask installed, go to https://metamask.io/ to install.
+To use it, open your browser and get to the address `http://localhost:3000`. 
+If you do not have metamask installed, go to https://metamask.io/ to install.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -157,9 +154,6 @@ To use it, open your browser and get to the address `http://localhost:3000`. If 
 
 See the [open issues](https://github.com/robertokbr/buymeacookie/issues) for a full list of proposed features (and known issues).
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -175,7 +169,6 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- LICENSE -->
 ## License
@@ -185,14 +178,12 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-
 <!-- CONTACT -->
 ## Contact
 
-Roberto Junior - [@robertojrdev](https://twitter.com/robertojrdev) - email@example.com
+Roberto Junior - [@robertojrdev](https://twitter.com/robertojrdev) - robertojuniordev@gmail.com
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- ACKNOWLEDGMENTS -->
@@ -204,19 +195,18 @@ This app backend (smart contract) was made following the resource bellow:
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/robertokbr/buymeacookie.svg?style=for-the-badge
+[contributors-url]: https://github.com/robertokbr/buymeacookie/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/robertokbr/buymeacookie.svg?style=for-the-badge
+[forks-url]: https://github.com/robertokbr/buymeacookie/network/members
+[stars-shield]: https://img.shields.io/github/stars/robertokbr/buymeacookie.svg?style=for-the-badge
+[stars-url]: https://github.com/robertokbr/buymeacookie/stargazers
+[issues-shield]: https://img.shields.io/github/issues/robertokbr/buymeacookie.svg?style=for-the-badge
+[issues-url]: https://github.com/robertokbr/buymeacookie/issues
+[license-shield]: https://img.shields.io/github/license/robertokbr/buymeacookie.svg?style=for-the-badge
+[license-url]: https://github.com/robertokbr/buymeacookie/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
+[linkedin-url]: https://linkedin.com/in/robertokbr
 [product-screenshot]: images/screenshot.png
