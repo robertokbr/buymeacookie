@@ -1,47 +1,87 @@
 import { useToast } from "@chakra-ui/react";
 import { createContext, useCallback, useEffect, useState } from "react";
-import { ethers, utils } from 'ethers';
-import { configs } from "../../configs";
-import Web3 from "web3";
+import { ethers } from 'ethers';
+import { abi, contractAddress } from "../../constants";
+import axios from "axios";
+import { FundMe } from '../../../../contracts/typechain-types/FundMe';
 
 interface ITransactionContext {
   handleConnectWallet(): Promise<void>;
   currentAccount: string;
-  userTokenAmount: string;
-  sendTransaction(value: number, message: string): Promise<void>;
+  userBalance: string;
+  sendTransaction(value: string, message: string): Promise<void>;
+  contractOwner: string;
+  handleWithdraw(): Promise<void>;
 }
 
 let ethereum: any;
-let web3: Web3;
+let contract: FundMe;
 
 if (typeof window !== "undefined") {
   ethereum = (window as any).ethereum; 
-  web3 = new Web3(ethereum);
+  const provider = new ethers.providers.Web3Provider(ethereum, "any");
+  const signer = provider.getSigner();
+  contract = new ethers.Contract(contractAddress, abi, signer) as FundMe;
 }
 
 export const TransactionContext = createContext({} as ITransactionContext);
 
 export function TransactionContextProvider({ children }) {
   const [currentAccount, setCurrentAccount] = useState<string | undefined>();
-  const [userTokenAmount, setUserTokenAmount] = useState("0");
-  const [currentChainId, setCurrentChainId] = useState(0);
+  const [userBalance, setUserBalance] = useState("0");
+  const [_currentChainId, setChainId] = useState(0);
+  const [contractOwner, setContractOwner] = useState("");
   const toast = useToast();
   
-  const handleWalletData = useCallback(async (reqAccount?: string) => {
-    const [account] = reqAccount ? [reqAccount] : await web3.eth.getAccounts();
-    if (!account) return;
-    const chainId = await web3.eth.getChainId();
-    const balance = await web3.eth.getBalance(account);
-    const formattedBalance = web3.utils.fromWei(balance); 
-    setCurrentChainId(chainId);
-    setUserTokenAmount(Number(formattedBalance).toFixed(4));
-    setCurrentAccount(account);
-  }, []);
+  const handleWalletData = useCallback(async (reqAccounts?: string[]) => {
+    try {
+      // Currently, only allowing rinkeby
+      const chainId = await ethereum.request({ method: 'eth_chainId' });
+      
+      if (chainId !== "0x4") {
+        toast({ 
+          status: 'error', 
+          title: "Please, change your network to Rinkeby!" 
+        });
+        return;
+      }
+      
+      const [account] = reqAccounts || await ethereum?.request({ 
+        method: "eth_accounts" 
+      });
+
+      if (!account) return;
+      
+      const [weiBalance, owner] = await Promise.all([
+        contract.provider.getBalance(account), 
+        contract.getOwner(),
+      ]);
+
+      const balance = ethers.utils.formatUnits(weiBalance).slice(0,5);
+      
+      setChainId(chainId);
+      setUserBalance(balance);
+      setCurrentAccount(account);
+      setContractOwner(owner.toLowerCase());
+    } catch (error) {
+      console.error(error);
+    }
+  }, [toast]);
 
   useEffect(() => {
     if (!ethereum) return;
     handleWalletData();
+  }, [handleWalletData]);
+
+  useEffect(() => {
+    if (!ethereum) return;
     ethereum.on('chainChanged', () => handleWalletData());
+    ethereum.on('accountsChanged', handleWalletData);
+
+    return () => {
+      ethereum.removeListener('chainChanged', () => handleWalletData());
+      ethereum.removeListener('accountsChanged', handleWalletData);
+    }
   }, [handleWalletData]);
 
   const handleConnectWallet = useCallback(async () => {
@@ -51,28 +91,61 @@ export function TransactionContextProvider({ children }) {
     };
 
     try {
-      const [reqAccount] = await ethereum.request({ method: "eth_requestAccounts" });
-      await handleWalletData(reqAccount);
+      const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+      await handleWalletData(accounts);
     } catch(error) {
-      toast({ status: "error", title: "Connection has failed" });
+      toast({ status: "error", title: error?.error?.message || "Connection has failed" });
       console.error(error);
     }
   }, [toast, handleWalletData]);
 
   const sendTransaction = useCallback(async (
-    _value: number,
-    _message: string,
+    value: string,
+    message?: string,
   ) => {
-    const provider = new ethers.providers.Web3Provider(ethereum);
-    const signer = provider.getSigner();
-    toast({ title: 'Transaction performed', status: 'success' })
+    try {
+      if (!currentAccount) return;
+
+      const transactionResponse = await contract.fund({ 
+        value: ethers.utils.parseEther(value),
+      });
+
+      await axios.post('/api/transactions', {
+        txHash: transactionResponse.hash,     
+        address: currentAccount, 
+        amount: value, 
+        message: message,
+      });
+
+      toast({ title: 'Transaction sent', status: 'success' });
+    } catch (error) {
+      toast({ title: error?.error?.message || "Internal error", status: 'error' });
+      console.error(error);
+    }
+  }, [currentAccount, toast]);
+
+  const handleWithdraw = useCallback(async () => {
+    try {
+      const transaction = await contract.withdraw();
+      toast({ status: "success", title: "Trasaction sent" });
+      transaction.wait(5).then(() => 
+        toast({ status: "success", title: "Withdraw completed" }),
+      );
+    } catch (error) {
+      toast({ 
+        status: "error", 
+        title: error?.error?.message || "Trasaction failed" 
+      });
+    }
   }, [toast]);
 
   return (
     <TransactionContext.Provider value={{
+      contractOwner,
+      handleWithdraw,
       handleConnectWallet,
       currentAccount,
-      userTokenAmount,  
+      userBalance,  
       sendTransaction,
     }}>
       {children}
