@@ -16,7 +16,7 @@
   <h3 align="center">buymeacookie</h3>
 
   <p align="center">
-    A crowd funding application made with Solidity, Hardhat, Next.JS and Ethers.JS.
+    A crowd funding application made with Solidity, Hardhat, Next.JS, Prisma.io and Ethers.JS.
     <br />
     <a href="https://github.com/robertokbr/buymeacookie"><strong>Explore the docs »</strong></a>
     <br />
@@ -48,6 +48,7 @@ Buymeacookie is an application inspired by the app [buymeacoffee](https://www.bu
 * [Chakra-ui](https://chakra-ui.com/)
 * [Hardhat](https://hardhat.org/)
 * [Ethers.js](https://www.npmjs.com/package/ethers)
+* [Prisma](https://prisma.io)
 
 
 <!-- GETTING STARTED -->
@@ -63,6 +64,10 @@ To get started wiht the Rinkeby setup, you don't need to deploy the smart contra
    ```sh
    cd frontend && npm install
    ```
+3. Copy envs
+   ```sh
+   cp .env.example .env
+   ```  
 3. Run frontend
    ```sh
    yarn dev
