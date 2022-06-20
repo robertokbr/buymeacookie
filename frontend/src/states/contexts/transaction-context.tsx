@@ -3,7 +3,8 @@ import { createContext, useCallback, useEffect, useState } from "react";
 import { ethers } from 'ethers';
 import { abi, contractAddress } from "../../constants";
 import axios from "axios";
-import { FundMe } from '../../../../contracts/typechain-types/FundMe';
+
+type FundMe = any;
 
 interface ITransactionContext {
   handleConnectWallet(): Promise<void>;
