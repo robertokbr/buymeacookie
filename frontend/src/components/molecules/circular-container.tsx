@@ -4,7 +4,7 @@ import { useTransaction } from "../../states/hooks/use-transaction";
 export function CircularContainer(props) {
   const { 
     currentAccount, 
-    userTokenAmount, 
+    userBalance, 
     handleConnectWallet 
   } = useTransaction();
 
@@ -18,7 +18,7 @@ export function CircularContainer(props) {
       {...props}
     >
       <Text fontSize="xl" fontWeight="500" mx="2">
-        {String(userTokenAmount).padEnd(4, ".00")}
+        {String(userBalance).padEnd(4, ".00")}
       </Text>
       <Flex
         as="button"
