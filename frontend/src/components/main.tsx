@@ -6,14 +6,19 @@ import { useTransaction } from "../states/hooks/use-transaction";
 import Input from "./atoms/input";
 
 export function Main() {
-  const [amountInput, setAmountInput] = useState<number>(0);
+  const [amountInput, setAmountInput] = useState("0");
   const [message, setMessage] = useState("");
-  const { sendTransaction } = useTransaction();
+  const { 
+    sendTransaction, 
+    currentAccount, 
+    contractOwner, 
+    handleWithdraw 
+  } = useTransaction();
 
   const handleAmountInputChange = useCallback((
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setAmountInput(Number(event.target.value));
+    setAmountInput(event.target.value);
   }, []);
 
   const handleMessageInputChange = useCallback((
@@ -25,7 +30,7 @@ export function Main() {
   const handleSendTransaction = useCallback(async () => {
     sendTransaction(amountInput, message);
   }, [sendTransaction, amountInput, message]);
-
+  
   return (
     <Flex
       borderRadius="3xl"
@@ -38,10 +43,10 @@ export function Main() {
     >
       <Stack spacing="3" w="100%">
         <Flex align="center" justify="space-between" pt="1" px="4">
-          <Text fontSize="2xl">Swap</Text>
+          <Text fontSize="2xl">Buy a cookie</Text>
           <Tooltip label="How many cookies you are buying with your contribution">
             <HStack spacing="2">
-              <Text>{Math.floor(amountInput / 0.0005)}X</Text>
+              <Text>{Math.floor(Number(amountInput) / 0.0005)}X</Text>
               <Icon as={GiCookie} color="gray.50" boxSize="26" />
             </HStack>
           </Tooltip>
@@ -82,16 +87,32 @@ export function Main() {
             onChange={handleMessageInputChange} 
           />
         </Stack>
-        <Button
-          fontSize="2xl"
-          bg="gray.600"
-          p="8"
-          borderRadius="3xl"
-          _hover={{ background: "gray.700" }}
-          onClick={handleSendTransaction}
-        >
-          Confirm Transaction
-        </Button>
+        <HStack>
+          <Button
+            fontSize="2xl"
+            bg="gray.600"
+            p="8"
+            w="100%"
+            borderRadius="3xl"
+            _hover={{ background: "gray.700" }}
+            onClick={handleSendTransaction}
+          >
+            {currentAccount ? "Confirm" : "Connect wallet"}
+          </Button>
+          {currentAccount && currentAccount === contractOwner && (
+            <Button
+              fontSize="2xl"
+              bg="gray.600"
+              p="8"
+              w="100%"
+              borderRadius="3xl"
+              _hover={{ background: "gray.700" }}
+              onClick={handleWithdraw}
+            >
+              Withdraw
+            </Button>
+          )}
+        </HStack>
       </Stack>
     </Flex>
   );
