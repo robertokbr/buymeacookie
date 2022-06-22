@@ -1,7 +1,7 @@
-import { Avatar, Flex, Text } from "@chakra-ui/react";
+import { Avatar, Flex, FlexboxProps, Text } from "@chakra-ui/react";
 import { useTransaction } from "../../states/hooks/use-transaction";
 
-export function CircularContainer(props) {
+export function Wallet(props: FlexboxProps) {
   const { 
     currentAccount, 
     userBalance, 
