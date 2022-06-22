@@ -2,6 +2,7 @@ import { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react';
 import { theme } from '../styles/theme';
 import { TransactionContextProvider } from '../states/contexts/transaction-context';
+import '../styles/styles.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
