@@ -6,11 +6,13 @@ import axios from "axios";
 
 type FundMe = any;
 
+type Transaction = { value: string; message?: string; github?: string };
+
 interface ITransactionContext {
   handleConnectWallet(): Promise<void>;
   currentAccount: string;
   userBalance: string;
-  sendTransaction(value: string, message: string): Promise<void>;
+  sendTransaction(data: Transaction): Promise<void>;
   contractOwner: string;
   handleWithdraw(): Promise<void>;
 }
@@ -100,10 +102,11 @@ export function TransactionContextProvider({ children }) {
     }
   }, [toast, handleWalletData]);
 
-  const sendTransaction = useCallback(async (
-    value: string,
-    message?: string,
-  ) => {
+  const sendTransaction = useCallback(async ({
+    value,
+    github,
+    message,
+  }: Transaction) => {
     try {
       if (!currentAccount) return;
 
@@ -113,7 +116,8 @@ export function TransactionContextProvider({ children }) {
 
       await axios.post('/api/transactions', {
         txHash: transactionResponse.hash,     
-        address: currentAccount, 
+        address: currentAccount,
+        github, 
         amount: value, 
         message: message,
       });
