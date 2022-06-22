@@ -14,7 +14,7 @@ error FundMe__NotOwner();
 contract FundMe {
   using PriceConverter for uint256;
 
-  uint256 public constant MINIMUM_USD = 50 * 1e18;
+  uint256 public constant MINIMUM_USD = 1 * 1e18;
   address[] private s_funders;
   mapping(address => uint256) private s_addressToAmountFunded;
   address private immutable i_owner;
@@ -42,7 +42,7 @@ contract FundMe {
    *  @notice This function funds this contract and create a realtion between sender and funds
    */
   function fund() public payable {
-    require(msg.value.getConversionRate(s_priceFeed) >= MINIMUM_USD, "The minimum fund value is 50 USD");
+    require(msg.value.getConversionRate(s_priceFeed) >= MINIMUM_USD, "The minimum fund value is 1 USD");
 
     s_funders.push(msg.sender);
     s_addressToAmountFunded[msg.sender] += msg.value;
