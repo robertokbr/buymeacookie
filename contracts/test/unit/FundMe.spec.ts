@@ -30,7 +30,7 @@ describe("FundMe", () => {
   describe("fund", async () => {
     it("should fail if you do not send enough ETH", async () => {
       await expect(fundMe.fund()).to.be.revertedWith(
-        "The minimum fund value is 50 USD",
+        "The minimum fund value is 1 USD",
       );
 
     });
