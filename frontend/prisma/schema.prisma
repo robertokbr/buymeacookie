@@ -14,6 +14,7 @@ model Transactions {
   txHash String @unique
   address String 
   amount String
+  github String?
   message String?
   createdAt DateTime @default(now())
 }
