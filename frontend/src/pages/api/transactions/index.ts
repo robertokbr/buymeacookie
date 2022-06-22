@@ -9,7 +9,8 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
 
     return res.json(result);
   } else if (req.method === 'POST') {
-    const { 
+    const {
+      github, 
       txHash,     
       address, 
       amount, 
@@ -18,6 +19,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
     
     const result = await prisma.transactions.create({
       data: {
+        github,
         txHash,     
         address, 
         amount, 
