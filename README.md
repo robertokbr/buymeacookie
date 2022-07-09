@@ -41,7 +41,7 @@
 
 ![Product Name Screen Shot](.github/screenshot.png)
 
-Buymeacookie is an dApp that uses the blockchain as the core infrastructure to handle donations and give credit to donors.It was made on top of the app Fund Me, created by Patrick Collins in his Blockchain, Solidity, and Full Stack Web3 Development with JavaScript – 32-Hour Course, a free course powered by freeCodeCamp.org.
+Buymeacookie is a dApp that uses the Ethereum blockchain as the core infrastructure to handle donations and give credit to donors. It has been made on top of the app Fund Me, created by Patrick Collins in his [Blockchain, Solidity, and Full Stack Web3 Development with JavaScript – 32-Hour Course, a free course](https://www.youtube.com/watch?v=gyMwXuJrbJQ&t=48465s), powered by freeCodeCamp.org.
 The usability of it was inspired by the app [buymeacoffee](https://www.buymeacoffee.com/), which is a content creator support application. 
 
 ### Built With
@@ -61,7 +61,7 @@ To get started wiht the Rinkeby setup, you don't need to deploy the smart contra
    ```sh
    git clone https://github.com/robertokbr/buymeacookie.git
    ```
-2. Run the docker-compose to set up the postgres database
+2. Run the docker-compose postgres database
    ```sh
    docker-compose up -d
    ``` 
@@ -79,7 +79,7 @@ To get started wiht the Rinkeby setup, you don't need to deploy the smart contra
    ```   
 6. Run frontend
    ```sh
-   yarn dev
+   npm run dev
    ```   
 
 <!-- USAGE EXAMPLES -->
