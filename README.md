@@ -41,7 +41,8 @@
 
 ![Product Name Screen Shot](.github/screenshot.png)
 
-Buymeacookie is an application inspired by the app [buymeacoffee](https://www.buymeacoffee.com/),which is a content creator support application. This uses the blockchain as the core infrastructure to handle donations and give credit to donors.
+Buymeacookie is an dApp that uses the blockchain as the core infrastructure to handle donations and give credit to donors.It was made on top of the app Fund Me, created by Patrick Collins in his Blockchain, Solidity, and Full Stack Web3 Development with JavaScript – 32-Hour Course, a free course powered by freeCodeCamp.org.
+The usability of it was inspired by the app [buymeacoffee](https://www.buymeacoffee.com/), which is a content creator support application. 
 
 ### Built With
 * [Next.js](https://nextjs.org/)
@@ -60,15 +61,23 @@ To get started wiht the Rinkeby setup, you don't need to deploy the smart contra
    ```sh
    git clone https://github.com/robertokbr/buymeacookie.git
    ```
-2. Install npm packages
+2. Run the docker-compose to set up the postgres database
+   ```sh
+   docker-compose up -d
+   ``` 
+3. Install npm packages
    ```sh
    cd frontend && npm install
    ```
-3. Copy envs
+4. Copy envs
    ```sh
    cp .env.example .env
-   ```  
-3. Run frontend
+   ```
+5. Run prisma migrations
+   ```sh
+   npm run prisma migrate dev
+   ```   
+6. Run frontend
    ```sh
    yarn dev
    ```   
