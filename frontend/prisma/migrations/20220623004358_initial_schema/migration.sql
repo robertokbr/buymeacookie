@@ -3,8 +3,9 @@ CREATE TABLE "Transactions" (
     "txHash" TEXT NOT NULL,
     "address" TEXT NOT NULL,
     "amount" TEXT NOT NULL,
+    "github" TEXT,
     "message" TEXT,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 -- CreateIndex
