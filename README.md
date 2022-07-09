@@ -39,7 +39,7 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 
-![Product Name Screen Shot](.github/screenshot.png)
+![Homepage Screen Shot](.github/fund.png)![Funders Screen Shot](.github/funders.png)
 
 Buymeacookie is a dApp that uses the Ethereum blockchain as the core infrastructure to handle donations and give credit to donors. It has been made on top of the app Fund Me, created by Patrick Collins in his [Blockchain, Solidity, and Full Stack Web3 Development with JavaScript – 32-Hour Course, a free course](https://www.youtube.com/watch?v=gyMwXuJrbJQ&t=48465s), powered by freeCodeCamp.org.
 The usability of it was inspired by the app [buymeacoffee](https://www.buymeacoffee.com/), which is a content creator support application. 
