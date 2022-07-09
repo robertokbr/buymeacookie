@@ -23,14 +23,13 @@ const deployFundMe = async (hre: HardhatRuntimeEnvironment & {
   if (!ethAggregatorPriceFeedAddress) throw new Error('Undefined aggregator address!');
 
   const args = [ethAggregatorPriceFeedAddress];
-  const waitConfirmations = (network.config as any).blockConfirmations || 1;
 
   const fundMe = await deploy("FundMe", {
     contract: "FundMe",
     from: deployer,
     log: true,
     args,
-    waitConfirmations,
+    waitConfirmations: chainId !== 3133 ? 6 : 1,
   });
 
   if (chainId !== 31337 && process.env.ETHERSCAM_API_KEY) {
