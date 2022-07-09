@@ -27,8 +27,8 @@ export const theme = extendTheme({
     }
   },
   fonts: {
-    body: 'Roboto Mono',
-    heading: 'Roboto Mono',
+    body: '"Roboto Mono", monospace',
+    heading: '"Roboto Mono", monospace',
   },
   colors: {
     gray: {
