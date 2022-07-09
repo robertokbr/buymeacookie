@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { PrismaClient } from "@prisma/client";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
@@ -16,21 +16,29 @@ export default function Home({ github, transactions }) {
       w="100vw"
     >
       <Head>
-        <title>🍪 buymeacookie</title>
+        <title>buymeacookie</title>
         <meta name="description" content="A crowd funding application to help content creators" />
       </Head>
       <Header />
       <Main data={{ github }}/>
       <Funders data={transactions} />
       <PageDownButton direction="down" />
+      <PageDownButton direction="up" />
     </Box>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const github = query?.github || "";
+  
   const transactions = await new PrismaClient().transactions.findMany({
-    select: {address: true, amount: true, github: true, message: true, txHash: true}
+    select: {
+      address: true, 
+      amount: true, 
+      github: true, 
+      message: true, 
+      txHash: true
+    }
   });
 
   return {

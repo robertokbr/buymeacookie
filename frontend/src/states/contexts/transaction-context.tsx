@@ -3,6 +3,7 @@ import { createContext, useCallback, useEffect, useState } from "react";
 import { ethers } from 'ethers';
 import { abi, contractAddress } from "../../constants";
 import axios from "axios";
+import { etherToCookie } from "../../utils/ether-to-cookie";
 
 type FundMe = any;
 
@@ -15,6 +16,7 @@ interface ITransactionContext {
   sendTransaction(data: Transaction): Promise<void>;
   contractOwner: string;
   handleWithdraw(): Promise<void>;
+  ethPrice: string;
 }
 
 let ethereum: any;
@@ -30,12 +32,19 @@ if (typeof window !== "undefined") {
 export const TransactionContext = createContext({} as ITransactionContext);
 
 export function TransactionContextProvider({ children }) {
+  const [ethPrice, setEthPrice] = useState("0");
   const [currentAccount, setCurrentAccount] = useState<string | undefined>();
   const [userBalance, setUserBalance] = useState("0");
   const [_currentChainId, setChainId] = useState(0);
   const [contractOwner, setContractOwner] = useState("");
   const toast = useToast();
   
+  useEffect(() => {
+    axios.get(
+      "https://api.coinbase.com/v2/prices/ETH-USD/spot"
+    ).then(({ data }) => setEthPrice(data.data.amount));
+  },[]);
+
   const handleWalletData = useCallback(async (reqAccounts?: string[]) => {
     try {
       // Currently, only allowing rinkeby
@@ -71,22 +80,6 @@ export function TransactionContextProvider({ children }) {
     }
   }, [toast]);
 
-  useEffect(() => {
-    if (!ethereum) return;
-    handleWalletData();
-  }, [handleWalletData]);
-
-  useEffect(() => {
-    if (!ethereum) return;
-    ethereum.on('chainChanged', () => handleWalletData());
-    ethereum.on('accountsChanged', handleWalletData);
-
-    return () => {
-      ethereum.removeListener('chainChanged', () => handleWalletData());
-      ethereum.removeListener('accountsChanged', handleWalletData);
-    }
-  }, [handleWalletData]);
-
   const handleConnectWallet = useCallback(async () => {
     if (!ethereum) {
       toast({ title: "Please, install MetaMask!" });
@@ -118,7 +111,7 @@ export function TransactionContextProvider({ children }) {
         txHash: transactionResponse.hash,     
         address: currentAccount,
         github, 
-        amount: value, 
+        amount: etherToCookie(value, ethPrice), 
         message: message,
       });
 
@@ -127,7 +120,7 @@ export function TransactionContextProvider({ children }) {
       toast({ title: error?.error?.message || "Internal error", status: 'error' });
       console.error(error);
     }
-  }, [currentAccount, toast]);
+  }, [currentAccount, ethPrice, toast]);
 
   const handleWithdraw = useCallback(async () => {
     try {
@@ -144,8 +137,25 @@ export function TransactionContextProvider({ children }) {
     }
   }, [toast]);
 
+  useEffect(() => {
+    if (!ethereum) return;
+    handleWalletData();
+  }, [handleWalletData]);
+
+  useEffect(() => {
+    if (!ethereum) return;
+    ethereum.on('chainChanged', () => handleWalletData());
+    ethereum.on('accountsChanged', handleWalletData);
+
+    return () => {
+      ethereum.removeListener('chainChanged', () => handleWalletData());
+      ethereum.removeListener('accountsChanged', handleWalletData);
+    }
+  }, [handleWalletData]);
+
   return (
     <TransactionContext.Provider value={{
+      ethPrice,
       contractOwner,
       handleWithdraw,
       handleConnectWallet,

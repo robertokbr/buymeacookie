@@ -15,8 +15,7 @@ export function FunderCard({ data }: FunderCardProps) {
   useEffect(() => {
     if (!data.github) return;
     axios.get("https://api.github.com/users/" + data.github).then(({ data }) => {
-    console.log(data.avatar_url)  
-    setUserAvatar(data.avatar_url);
+      setUserAvatar(data.avatar_url);
     });
   }, [data?.github]);
 

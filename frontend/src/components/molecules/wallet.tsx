@@ -1,4 +1,4 @@
-import { Avatar, Flex, FlexboxProps, Text } from "@chakra-ui/react";
+import { Flex, FlexboxProps, Text } from "@chakra-ui/react";
 import { useTransaction } from "../../states/hooks/use-transaction";
 
 export function Wallet(props: FlexboxProps) {
@@ -36,7 +36,6 @@ export function Wallet(props: FlexboxProps) {
             : "Connect MetaMask"
           }
         </Text>
-        <Avatar ml="2" size="sm" name="Roberto Junior"/>
       </Flex>
     </Flex>
   );
