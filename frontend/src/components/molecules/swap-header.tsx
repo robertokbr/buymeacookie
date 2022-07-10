@@ -14,7 +14,7 @@ export function SwapHeader({ data }: SwapHeaderProps) {
 
   return (
     <Flex align="center" justify="space-between" pt="1" px="4">
-      <Text fontSize="2xl">Buy a cookie</Text>
+      <Text fontSize="2xl">Buy me a cookie</Text>
       <Tooltip label="How many cookies you are buying with your contribution">
         <HStack spacing="2">
           <Text>{etherToCookie(data.amount, ethPrice)}X</Text>
